@@ -14,15 +14,15 @@ input:    /* empty string */
         | input line
 ;
 line: '\n'
-	| exp '\n' { printf ("\t%.10g\n", $1); }
+| exp '\n' { printf ("\t%.10g\n", $1); }
 ;
-exp: 	NUM {$$ = $1;}
-	| exp exp '+' {$$ = $1+$2;}
-	| exp exp '-' {$$ = $1-$2;}
-	| exp exp '' {$$ = $1$2;}
-	| exp exp '/' {$$ = $1/$2;}
-	//| exp exp '^' { $$ = pow ($1, $2); }
-	| exp 'n'     { $$ = -$1;}
+exp: NUM {$$ = $1;}
+| exp exp '+' {$$ = $1+$2;}
+| exp exp '-' {$$ = $1-$2;}
+| exp exp '*' {$$ = $1*$2;}
+| exp exp '/' {$$ = $1/$2;}
+//| exp exp '^' { $$ = pow ($1, $2); }
+| exp 'n'     { $$ = -$1;}
 ;
 %%
 
@@ -47,9 +47,9 @@ int yylex ()
   return c;                                
 }
 
-void yyerror (char s){  / Called by yyparse on error */
+void yyerror (char* s){  
   printf ("%s\n", s);
 }
 void main(){
-	yyparse();
+yyparse();
 }
